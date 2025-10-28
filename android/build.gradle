@@ -1,0 +1,67 @@
+group = "com.igaworks.dfinery.dfinery_plugin"
+version = "1.0.2"
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
+    }
+
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.7.0")
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
+    }
+}
+
+apply plugin: "com.android.library"
+
+android {
+    if (project.android.hasProperty("namespace")) {
+        namespace = "com.igaworks.dfinery.dfinery_plugin"
+    }
+
+    compileSdk = 35
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdk = 21
+    }
+
+    dependencies {
+        testImplementation("junit:junit:4.13.2")
+        testImplementation("org.mockito:mockito-core:5.0.0")
+        implementation 'com.igaworks.dfinery:android-sdk:2.4.3'
+        implementation 'com.google.android.gms:play-services-appset:16.0.2'
+        implementation 'androidx.core:core:1.5.0'
+        implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+        implementation 'com.google.firebase:firebase-messaging:24.0.0'
+    }
+
+    testOptions {
+        unitTests.all {
+            testLogging {
+               events "passed", "skipped", "failed", "standardOut", "standardError"
+               outputs.upToDateWhen {false}
+               showStandardStreams = true
+            }
+        }
+    }
+}

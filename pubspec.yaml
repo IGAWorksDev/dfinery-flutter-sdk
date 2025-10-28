@@ -1,0 +1,26 @@
+name: dfinery_plugin
+description: "Dfinery plugin for Flutter"
+version: 1.0.2
+homepage: https://www.dfinery.io
+
+environment:
+  sdk: '>=2.12.0 <4.0.0'
+  flutter: '>=1.20.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.igaworks.dfinery.dfinery_plugin
+        pluginClass: DfineryPlugin
+      ios:
+        pluginClass: DfineryPlugin
