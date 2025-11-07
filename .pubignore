@@ -1,22 +1,5 @@
-# Build outputs
-example/build/
-example/.dart_tool/
-example/ios/DerivedData/
-example/ios/Pods/
-example/ios/Runner.xcworkspace/xcuserdata/
-example/ios/Runner.xcodeproj/xcuserdata/
-example/android/app/build/
-example/android/build/
-example/android/.gradle/
-example/android/local.properties
-example/android/key.properties
-
-# Generated files
-example/ios/Flutter/Generated.xcconfig
-example/ios/Flutter/flutter_export_environment.sh
-example/ios/Flutter/ephemeral/
-example/ios/ServiceDefinitions.json
-example/ios/Runner/GeneratedPluginRegistrant.*
+# example
+example/
 
 # IDE files
 .vscode/
