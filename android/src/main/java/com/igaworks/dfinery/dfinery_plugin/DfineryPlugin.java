@@ -1,32 +1,22 @@
 package com.igaworks.dfinery.dfinery_plugin;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.util.Base64;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.DefaultLifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
 
 import com.igaworks.dfinery.Dfinery;
 import com.igaworks.dfinery.DfineryActivityLifecycleCallbacks;
 import com.igaworks.dfinery.DfineryBridge;
 import com.igaworks.dfinery.DfineryProperties;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
-import io.flutter.embedding.engine.plugins.activity.ActivityAware;
-import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
