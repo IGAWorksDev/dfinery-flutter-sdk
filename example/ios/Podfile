@@ -37,9 +37,11 @@ target 'Runner' do
     inherit! :search_paths
   end
 
-  target 'SampleServiceExtension' do
-    pod 'DfinerySDKServiceExtension'
-  end
+end
+
+target 'SampleServiceExtension' do
+  use_frameworks!
+  pod 'DfinerySDKServiceExtension'
 end
 
 
