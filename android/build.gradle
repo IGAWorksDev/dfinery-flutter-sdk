@@ -1,10 +1,14 @@
 group = "com.igaworks.dfinery.dfinery_plugin"
-version = "1.0.2"
+version = "1.0.3"
 
 buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
     }
 
     dependencies {
@@ -16,6 +20,10 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        maven {
+            name = 'Central Portal Snapshots'
+            url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        }
     }
 }
 
