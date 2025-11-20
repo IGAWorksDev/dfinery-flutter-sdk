@@ -1,6 +1,6 @@
 name: dfinery_plugin
 description: "Dfinery plugin for Flutter"
-version: 1.0.2
+version: 1.0.3
 homepage: https://www.dfinery.io
 
 environment:
