@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'dfinery_plugin'
-  s.version          = '1.0.3'
+  s.version          = '1.0.4'
   s.summary          = 'Dfinery Flutter Plugin'
   s.description      = <<-DESC
 Dfinery Flutter Plugin
@@ -11,8 +11,8 @@ Dfinery Flutter Plugin
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency "DfinerySDK", "2.3.3"
-  s.dependency "DfinerySDKServiceExtension", "2.3.3"
+  s.dependency "DfinerySDK", "2.3.4"
+  s.dependency "DfinerySDKServiceExtension", "2.3.4"
 
   s.platform = :ios, '12.0'
   
