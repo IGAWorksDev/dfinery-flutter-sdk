@@ -1,5 +1,5 @@
 group = "com.igaworks.dfinery.dfinery_plugin"
-version = "1.0.3"
+version = "1.0.4"
 
 buildscript {
     repositories {
@@ -48,7 +48,7 @@ android {
     dependencies {
         testImplementation("junit:junit:4.13.2")
         testImplementation("org.mockito:mockito-core:5.0.0")
-        implementation 'com.igaworks.dfinery:android-sdk:2.4.3'
+        implementation 'com.igaworks.dfinery:android-sdk:2.4.6'
         implementation 'com.google.android.gms:play-services-appset:16.0.2'
         implementation 'androidx.core:core:1.5.0'
         implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
