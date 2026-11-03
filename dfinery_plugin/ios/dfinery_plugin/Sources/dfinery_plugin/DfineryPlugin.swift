@@ -16,16 +16,6 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
         Dfinery.shared().pend()
-        
-        // Check current notification authorization status and register if already authorized
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
-                DispatchQueue.main.async {
-                    application.registerForRemoteNotifications()
-                }
-            }
-        }
-        
         return true
     }
     
@@ -45,13 +35,6 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         self.deviceToken = deviceToken
-        
-        // If there's a pending getPushToken request, complete it
-        if let pending = self.pendingTokenResult {
-            self.pendingTokenResult = nil
-            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-            pending(pushToken)
-        }
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -219,27 +202,14 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
         result(nil)
     }
 
-    private var pendingTokenResult: FlutterResult? = nil
-    
     private func handleGetPushToken(result: @escaping FlutterResult) {
-        // If token already exists, return it immediately
+        // permission_handler에서 이미 registerForRemoteNotifications() 호출됨
+        // 저장된 토큰이 있으면 반환, 없으면 nil
         if let deviceToken = self.deviceToken {
             let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
             result(pushToken)
-            return
-        }
-        
-        // Check if notification permission is granted and register if needed
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-            DispatchQueue.main.async {
-                if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
-                    // Store the result callback to be called when token is received
-                    self.pendingTokenResult = result
-                    UIApplication.shared.registerForRemoteNotifications()
-                } else {
-                    result(nil)
-                }
-            }
+        } else {
+            result(nil)
         }
     }
 
