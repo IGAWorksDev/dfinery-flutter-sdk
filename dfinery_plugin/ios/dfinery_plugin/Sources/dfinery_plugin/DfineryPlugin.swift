@@ -35,6 +35,15 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         self.deviceToken = deviceToken
+        
+        // 대기 중인 getPushToken 콜백이 있으면 토큰 반환
+        if let pending = self.pendingTokenResult {
+            self.tokenTimeoutWorkItem?.cancel()
+            self.tokenTimeoutWorkItem = nil
+            self.pendingTokenResult = nil
+            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            pending(pushToken)
+        }
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -202,14 +211,42 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
         result(nil)
     }
 
+    private var pendingTokenResult: FlutterResult? = nil
+    private var tokenTimeoutWorkItem: DispatchWorkItem? = nil
+
     private func handleGetPushToken(result: @escaping FlutterResult) {
-        // permission_handler에서 이미 registerForRemoteNotifications() 호출됨
-        // 저장된 토큰이 있으면 반환, 없으면 nil
+        // 토큰이 이미 있으면 즉시 반환
         if let deviceToken = self.deviceToken {
             let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
             result(pushToken)
-        } else {
-            result(nil)
+            return
+        }
+        
+        // 권한 상태 확인
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
+                    // 이전 대기 콜백 취소
+                    self.tokenTimeoutWorkItem?.cancel()
+                    
+                    // 콜백 저장 후 토큰 도착 대기
+                    self.pendingTokenResult = result
+                    
+                    // 10초 타임아웃 설정
+                    let timeoutWork = DispatchWorkItem { [weak self] in
+                        if let pending = self?.pendingTokenResult {
+                            self?.pendingTokenResult = nil
+                            self?.tokenTimeoutWorkItem = nil
+                            pending(nil)
+                        }
+                    }
+                    self.tokenTimeoutWorkItem = timeoutWork
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 10, execute: timeoutWork)
+                } else {
+                    // 권한 없으면 nil 반환
+                    result(nil)
+                }
+            }
         }
     }
 
