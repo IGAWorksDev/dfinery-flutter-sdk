@@ -1,6 +1,6 @@
+# example
 example/
-.github/
-.gitignore
+example_pods/
 
 # IDE files
 .vscode/
