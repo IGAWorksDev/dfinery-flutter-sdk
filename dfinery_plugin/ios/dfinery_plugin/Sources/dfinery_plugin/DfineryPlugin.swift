@@ -15,9 +15,16 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     }
     
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [AnyHashable : Any] = [:]) -> Bool {
-        application.registerForRemoteNotifications()
-        
         Dfinery.shared().pend()
+        
+        // Check current notification authorization status and register if already authorized
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
+                DispatchQueue.main.async {
+                    application.registerForRemoteNotifications()
+                }
+            }
+        }
         
         return true
     }
@@ -38,6 +45,13 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     
     public func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         self.deviceToken = deviceToken
+        
+        // If there's a pending getPushToken request, complete it
+        if let pending = self.pendingTokenResult {
+            self.pendingTokenResult = nil
+            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            pending(pushToken)
+        }
     }
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -77,6 +91,9 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
 
         case "disableSDK":
             handleDisableSDK(result: result)
+
+        case "attAuthorized":
+            handleAttAuthorized(call, result: result)
 
         default:
             result(FlutterMethodNotImplemented)
@@ -202,14 +219,28 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
         result(nil)
     }
 
+    private var pendingTokenResult: FlutterResult? = nil
+    
     private func handleGetPushToken(result: @escaping FlutterResult) {
-        guard let deviceToken = self.deviceToken else {
-            result(nil)
+        // If token already exists, return it immediately
+        if let deviceToken = self.deviceToken {
+            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            result(pushToken)
             return
         }
-        let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-
-        result(pushToken)
+        
+        // Check if notification permission is granted and register if needed
+        UNUserNotificationCenter.current().getNotificationSettings { settings in
+            DispatchQueue.main.async {
+                if settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional {
+                    // Store the result callback to be called when token is received
+                    self.pendingTokenResult = result
+                    UIApplication.shared.registerForRemoteNotifications()
+                } else {
+                    result(nil)
+                }
+            }
+        }
     }
 
     private func handleEnableSDK(result: @escaping FlutterResult) {
@@ -219,6 +250,23 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
 
     private func handleDisableSDK(result: @escaping FlutterResult) {
         Dfinery.shared().disableSDK()
+        result(nil)
+    }
+
+    private func handleAttAuthorized(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
+        guard let args = call.arguments as? [String: Any],
+              let authorized = args["authorized"] as? Bool else {
+            result(FlutterError(code: "INVALID_ARGUMENTS",
+                                message: "authorized is required",
+                                details: nil))
+            return
+        }
+        // attAuthorized API requires DfinerySDK 2.6.0+
+        // Use dynamic invocation for backward compatibility with 2.5.1
+        let selector = NSSelectorFromString("attAuthorized:")
+        if Dfinery.shared().responds(to: selector) {
+            Dfinery.shared().perform(selector, with: NSNumber(value: authorized))
+        }
         result(nil)
     }
 }

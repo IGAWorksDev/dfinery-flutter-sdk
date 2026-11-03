@@ -137,6 +137,29 @@ class Dfinery {
     _channel.invokeMethod("resetIdentity");
   }
 
+  /// Notifies the SDK of the App Tracking Transparency (ATT) authorization status.
+  ///
+  /// Call this method after requesting ATT permission to inform the SDK
+  /// whether the user authorized tracking.
+  ///
+  /// **iOS only.** This method does nothing on Android.
+  ///
+  /// Example usage:
+  /// ```dart
+  /// // After requesting ATT permission
+  /// final status = await ATTrackingManager.requestTrackingAuthorization();
+  /// Dfinery.attAuthorized(authorized: status == TrackingStatus.authorized);
+  /// ```
+  static void attAuthorized({required bool authorized}) {
+    if (!Platform.isIOS) {
+      return;
+    }
+    final Map<String, dynamic> params = <String, dynamic>{
+      "authorized": authorized
+    };
+    _channel.invokeMethod("attAuthorized", params);
+  }
+
   /// Sets the Google Advertising ID and associated ad-tracking enabled field for this device.
   ///
   /// **Android only.** This method does nothing on iOS.
