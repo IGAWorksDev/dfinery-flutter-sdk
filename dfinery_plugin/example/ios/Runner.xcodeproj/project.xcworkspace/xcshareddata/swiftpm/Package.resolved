@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "dfinery-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IGAWorksDev/dfinery-ios-sdk",
+      "state" : {
+        "revision" : "ae6065c7905a9bb709fdf797e8b320331f64c2a1",
+        "version" : "2.6.0"
+      }
+    }
+  ],
+  "version" : 2
+}
