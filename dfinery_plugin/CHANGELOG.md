@@ -1,4 +1,4 @@
-## 2.0.0 (2025-07-14)
+## 2.0.0 (2026-11-04)
 
 <details open>
 <summary>EN</summary>
@@ -9,25 +9,33 @@
 - iOS deployment target raised from 12.0 to 15.0 (required by Xcode 27)
 
 ##### Added
+- `attAuthorized` API for App Tracking Transparency authorization status handling
+- SceneDelegate support for Xcode 27 compatibility
 - Swift Package Manager (SPM) support for iOS dependency management
 - Package.swift file for SPM-based iOS projects
 
+##### Improved
+- `getPushToken` now uses async callback pattern with 10-second timeout for reliable APNS token retrieval [iOS]
+
 ##### Changed
 - Android SDK updated to version 2.7.4
-- iOS DfinerySDK updated to version 2.5.1
-- iOS DfinerySDKServiceExtension updated to version 2.5.1
+- iOS DfinerySDK updated to version 2.5.1 (CocoaPods) / 2.6.0 (SPM)
+- iOS DfinerySDKServiceExtension updated to version 2.5.1 (CocoaPods) / 2.6.0 (SPM)
 
 ##### Notes
-- CocoaPods remains supported for backward compatibility
-- Existing iOS projects can continue using CocoaPods or migrate to SPM
+- iOS apps using SceneDelegate lifecycle can now properly initialize the SDK
+- [CocoaPods Specs repository will transition to read-only in December 2026](https://blog.cocoapods.org/CocoaPods-Specs-Repo/), so SPM is recommended for Flutter iOS builds. Existing CocoaPods setups will continue to work with version 2.5.1.
 
 ##### Versions
 
 - **Android**
   - Dfinery Android SDK 2.7.4
-- **iOS**
+- **iOS (CocoaPods)**
   - Dfinery iOS SDK 2.5.1
   - Dfinery iOS SDK Service Extension 2.5.1
+- **iOS (SPM)**
+  - Dfinery iOS SDK 2.6.0
+  - Dfinery iOS SDK Service Extension 2.6.0
 
 </details>
 
@@ -40,25 +48,33 @@
 - iOS deployment target이 12.0에서 15.0으로 상향됨 (Xcode 27 최소 요구사항)
 
 ##### 추가됨
+- App Tracking Transparency 권한 상태 처리를 위한 `attAuthorized` API 추가
+- Xcode 27 호환성을 위한 SceneDelegate 지원
 - iOS 의존성 관리를 위한 Swift Package Manager (SPM) 지원
 - SPM 기반 iOS 프로젝트를 위한 Package.swift 파일
 
+##### 개선됨
+- `getPushToken`이 안정적인 APNS 토큰 수신을 위해 10초 타임아웃이 포함된 비동기 콜백 패턴을 사용하도록 개선됨 [iOS]
+
 ##### 변경됨
 - Android SDK 버전 2.7.4로 업데이트
-- iOS DfinerySDK 버전 2.5.1로 업데이트
-- iOS DfinerySDKServiceExtension 버전 2.5.1로 업데이트
+- iOS DfinerySDK 버전 2.5.1 (CocoaPods) / 2.6.0 (SPM)으로 업데이트
+- iOS DfinerySDKServiceExtension 버전 2.5.1 (CocoaPods) / 2.6.0 (SPM)으로 업데이트
 
 ##### 주요 사항
-- 하위 호환성을 위해 CocoaPods 계속 지원
-- 기존 iOS 프로젝트는 CocoaPods를 계속 사용하거나 SPM으로 마이그레이션 가능
+- SceneDelegate 생명주기를 사용하는 iOS 앱에서 SDK를 정상적으로 초기화할 수 있음
+- [CocoaPods Specs 저장소가 2026년 12월 부로 읽기 전용으로 전환](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)되므로 Flutter iOS 빌드 시 SPM 사용을 권장합니다. 기존 CocoaPods 설정은 버전 2.5.1로 계속 사용 가능합니다.
 
 ##### 버전 정보
 
 - **Android**
   - Dfinery Android SDK 2.7.4
-- **iOS**
+- **iOS (CocoaPods)**
   - Dfinery iOS SDK 2.5.1
   - Dfinery iOS SDK Service Extension 2.5.1
+- **iOS (SPM)**
+  - Dfinery iOS SDK 2.6.0
+  - Dfinery iOS SDK Service Extension 2.6.0
 
 </details>
 
