@@ -122,6 +122,3 @@ app.*.symbols
 .idea/
 .kiro/
 **/swiftpm/
-
-# CocoaPods test example (not for commit)
-example_pods/
