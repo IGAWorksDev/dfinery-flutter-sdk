@@ -41,7 +41,7 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
             self.tokenTimeoutWorkItem?.cancel()
             self.tokenTimeoutWorkItem = nil
             self.pendingTokenResult = nil
-            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            let pushToken = deviceToken.map { String(format: "%02x", $0) }.joined()
             pending(pushToken)
         }
     }
@@ -217,7 +217,7 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
     private func handleGetPushToken(result: @escaping FlutterResult) {
         // 토큰이 이미 있으면 즉시 반환
         if let deviceToken = self.deviceToken {
-            let pushToken = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+            let pushToken = deviceToken.map { String(format: "%02x", $0) }.joined()
             result(pushToken)
             return
         }
