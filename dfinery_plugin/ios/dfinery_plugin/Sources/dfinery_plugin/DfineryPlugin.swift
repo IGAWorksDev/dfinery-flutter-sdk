@@ -232,6 +232,10 @@ public class DfineryPlugin: NSObject, FlutterPlugin {
                     // 콜백 저장 후 토큰 도착 대기
                     self.pendingTokenResult = result
                     
+                    // 토큰이 없으면 registerForRemoteNotifications 호출
+                    // (이미 권한이 있는 상태에서 permission_handler가 호출하지 않는 경우 대비)
+                    UIApplication.shared.registerForRemoteNotifications()
+                    
                     // 10초 타임아웃 설정
                     let timeoutWork = DispatchWorkItem { [weak self] in
                         if let pending = self?.pendingTokenResult {
