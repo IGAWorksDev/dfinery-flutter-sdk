@@ -1,0 +1,25 @@
+platform :ios, '15.0'
+
+ENV['COCOAPODS_DISABLE_STATS'] = 'true'
+
+# Runner target is required as host for SampleServiceExtension
+# Flutter plugins are handled via SPM, not CocoaPods
+target 'Runner' do
+  use_frameworks!
+end
+
+# SampleServiceExtension uses DfinerySDKServiceExtension via CocoaPods
+# Note: In production apps, users should add DfinerySDKServiceExtension via SPM
+# to their own Notification Service Extension target
+target 'SampleServiceExtension' do
+  use_frameworks!
+  pod 'DfinerySDKServiceExtension'
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+    end
+  end
+end

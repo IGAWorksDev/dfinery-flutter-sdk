@@ -1,0 +1,22 @@
+# example
+example/
+example_pods/
+
+# SPM resolved files (gitignored but checked in)
+**/swiftpm/Package.resolved
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local development
+.env
+.env.local
+.env.*.local 
