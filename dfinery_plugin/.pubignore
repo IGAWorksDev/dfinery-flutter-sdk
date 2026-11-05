@@ -1,5 +1,12 @@
-# example (include example/ for pub.dev)
-example_pods/
+# example (include example/lib for pub.dev)
+example/build/
+example/android/
+example/ios/
+example/.dart_tool/
+example/.flutter-plugins
+example/.flutter-plugins-dependencies
+example/pubspec.lock
+example/*.iml
 
 # IDE files
 .vscode/
