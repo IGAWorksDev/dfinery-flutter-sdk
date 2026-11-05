@@ -1,5 +1,5 @@
 name: dfinery_plugin
-description: "Dfinery plugin for Flutter"
+description: "Official Dfinery Flutter plugin for customer data analytics, event tracking, user profiling, and push notification integration. Easily connect your Flutter app to Dfinery SDK."
 version: 2.0.0
 homepage: https://docs.dfinery.ai/developer-guide/platform/flutter
 

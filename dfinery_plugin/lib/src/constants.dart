@@ -199,6 +199,9 @@ class DFiOSLogLevel {
 
 /// Android log level. Definition follows the constant of android.util.Log.
 class DFAndroidLogLevel {
+  /// Private constructor to prevent instantiation.
+  DFAndroidLogLevel._();
+
   /// @see https://developer.android.com/reference/android/util/Log#VERBOSE
   static const int verbose = 2;
 
@@ -220,6 +223,9 @@ class DFAndroidLogLevel {
 
 /// Attribute values to be used when creating an Android notification channel.
 class DFAndroidNotificationChannelProperty {
+  /// Private constructor to prevent instantiation.
+  DFAndroidNotificationChannelProperty._();
+
   /// @see https://developer.android.com/reference/android/app/NotificationChannel#getId()
   static const String id = "id";
 
@@ -259,6 +265,9 @@ class DFAndroidNotificationChannelProperty {
 
 /// Attribute values to be used when creating an Android notification channel group.
 class DFAndroidNotificationChannelGroupProperty {
+  /// Private constructor to prevent instantiation.
+  DFAndroidNotificationChannelGroupProperty._();
+
   /// @see https://developer.android.com/reference/android/app/NotificationChannelGroup#getId()
   static const String id = "id";
 
@@ -268,6 +277,9 @@ class DFAndroidNotificationChannelGroupProperty {
 
 /// The amount the user should be interrupted by notifications from this channel.
 class DFAndroidNotificationChannelImportance {
+  /// Private constructor to prevent instantiation.
+  DFAndroidNotificationChannelImportance._();
+
   /// @see https://developer.android.com/reference/android/app/NotificationManager#IMPORTANCE_NONE
   static const int none = 0;
 

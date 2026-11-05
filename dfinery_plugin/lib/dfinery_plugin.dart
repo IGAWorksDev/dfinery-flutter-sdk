@@ -1,3 +1,31 @@
+/// Dfinery Flutter SDK for customer data analytics and marketing automation.
+///
+/// This library provides a Flutter plugin for integrating Dfinery's
+/// customer data platform (CDP) and CRM capabilities into your app.
+///
+/// ## Getting Started
+///
+/// Initialize the SDK early in your app's lifecycle:
+///
+/// ```dart
+/// import 'package:dfinery_plugin/dfinery_plugin.dart';
+///
+/// void main() {
+///   Dfinery.init(serviceId: 'YOUR_SERVICE_ID');
+///   runApp(MyApp());
+/// }
+/// ```
+///
+/// ## Features
+///
+/// - Event tracking with [Dfinery.logEvent]
+/// - User profile management with [Dfinery.setUserProfile]
+/// - Identity management with [Dfinery.setIdentity]
+/// - Push notification support with [Dfinery.setPushToken]
+///
+/// For more information, see the [Dfinery Developer Guide](https://docs.dfinery.ai/developer-guide/platform/flutter).
+library;
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -105,8 +133,6 @@ class Dfinery {
         return 'kakao_user_id';
       case DFIdentity.lineUserId:
         return 'line_user_id';
-      default:
-        return '';
     }
   }
 
