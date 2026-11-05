@@ -1,4 +1,4 @@
-## 2.0.0 (2026-11-04)
+## 2.0.0 (2026-11-05)
 
 <details open>
 <summary>EN</summary>

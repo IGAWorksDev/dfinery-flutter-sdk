@@ -28,7 +28,7 @@ CocoaPods 빌드를 위해서는 먼저 SPM을 비활성화해야 합니다. 아
 
 | 빌드 방식 | DfinerySDK 버전 | 설정 파일 |
 |-----------|-----------------|-----------|
-| SPM | 2.6.0+ | `ios/dfinery_plugin/Package.swift` |
+| SPM | 2.6.0 | `ios/dfinery_plugin/Package.swift` |
 | CocoaPods | 2.5.1 | `ios/dfinery_plugin.podspec` |
 
 **SPM 버전 확인:**
@@ -114,7 +114,7 @@ flutter build ios --no-codesign
 
 ### 참고
 
-> ⚠️ CocoaPods 레지스트리는 2026년 12월 2일부터 읽기 전용이 됩니다. SPM 비활성화는 향후 허용되지 않을 예정입니다.
+> ⚠️ [CocoaPods Specs 저장소가 2026년 12월 부로 읽기 전용으로 전환](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)되므로 Flutter iOS 빌드 시 SPM 사용을 권장합니다.
 
 ## iOS Notification Service Extension 설정
 

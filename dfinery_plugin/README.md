@@ -25,8 +25,8 @@
 
 ### iOS
 
-- iOS 12.0
-- Xcode 16.0
+- iOS 15.0
+- Xcode 27.0
 
 ---
 
@@ -85,6 +85,8 @@ The plugin automatically resolves the following SPM dependencies:
 |---------|---------|------------|
 | DfinerySDK | 2.6.0 | https://github.com/IGAWorksDev/dfinery-ios-sdk |
 
+> ⚠️ [CocoaPods Specs repository will transition to read-only in December 2026](https://blog.cocoapods.org/CocoaPods-Specs-Repo/), so SPM is recommended for Flutter iOS builds.
+
 > **Note:** `DfinerySDKServiceExtension` is not included in the plugin. It must be added separately to your Notification Service Extension target. See [DfinerySDKServiceExtension Setup](#dfinerysdkserviceextension-setup) for details.
 
 ### CocoaPods (Legacy)
@@ -94,8 +96,10 @@ CocoaPods is supported for backward compatibility.
 Ensure your `ios/Podfile` includes:
 
 ```ruby
-platform :ios, '12.0'
+platform :ios, '15.0'
 ```
+
+> **Note:** CocoaPods version is fixed at 2.5.1. For the latest features, migrate to SPM.
 
 Then install dependencies:
 
@@ -173,7 +177,7 @@ To enable rich push notifications with images and action buttons, configure the 
 2. **File → New → Target**
 3. Select **Notification Service Extension**
 4. Set Product Name (e.g., `NotificationServiceExtension`)
-5. Set Minimum Deployment Target to **iOS 12.0**
+5. Set Minimum Deployment Target to **iOS 15.0**
 6. Click **Finish**
 
 ### Step 2: Add DfinerySDKServiceExtension Dependency
@@ -182,7 +186,9 @@ To enable rich push notifications with images and action buttons, configure the 
 
 1. Select the **Notification Service Extension target** in Xcode
 2. Go to **General → Frameworks, Libraries, and Embedded Content**
-3. Click **+** and add `DfinerySDKServiceExtension`
+3. Click **+** → **Add Package Dependency...**
+4. Enter package URL: `https://github.com/IGAWorksDev/dfinery-ios-sdk`
+5. Select `DfinerySDKServiceExtension` library and add
 
 #### For CocoaPods Projects
 
@@ -191,7 +197,7 @@ Add to your `Podfile`:
 ```ruby
 target 'NotificationServiceExtension' do
   use_frameworks!
-  pod 'DfinerySDKServiceExtension', '2.6.0'
+  pod 'DfinerySDKServiceExtension', '2.5.1'
 end
 ```
 
