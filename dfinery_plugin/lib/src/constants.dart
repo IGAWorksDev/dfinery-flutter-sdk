@@ -1,5 +1,8 @@
 /// A collection of constants for predefined event names in Dfinery.
 class DFEvent {
+  /// Private constructor to prevent instantiation.
+  DFEvent._();
+
   /// Reports events when a user logs in.
   static const String login = 'df_login';
 
@@ -48,6 +51,9 @@ class DFEvent {
 
 /// A collection of constants for predefined event properties in Dfinery.
 class DFEventProperty {
+  /// Private constructor to prevent instantiation.
+  DFEventProperty._();
+
   /// Key value of an array containing products.
   static const String items = 'df_items';
 
@@ -111,6 +117,9 @@ class DFEventProperty {
 
 /// A collection of constants for predefined user profile names in Dfinery.
 class DFUserProfile {
+  /// Private constructor to prevent instantiation.
+  DFUserProfile._();
+
   /// User's name.
   static const String name = 'df_name';
 
@@ -138,6 +147,9 @@ class DFUserProfile {
 
 /// A collection of constants for predefined gender values in Dfinery.
 class DFGender {
+  /// Private constructor to prevent instantiation.
+  DFGender._();
+
   /// Value meaning male.
   static const String male = 'Male';
 
@@ -153,6 +165,9 @@ class DFGender {
 
 /// DfineryConfig is used to apply configuration items to the SDK.
 class DFConfig {
+  /// Private constructor to prevent instantiation.
+  DFConfig._();
+
   /// Sets iOS log level. Use DFLogLevel values.
   static const String iosLogLevel = "df_config_log_level";
 
@@ -181,6 +196,9 @@ class DFConfig {
 
 /// iOS log level. Definition follows the DFLogLevel enum in DfinerySDK.
 class DFiOSLogLevel {
+  /// Private constructor to prevent instantiation.
+  DFiOSLogLevel._();
+
   /// Most detailed logging. Logs all messages.
   static const int verbose = 2;
 
@@ -303,6 +321,9 @@ class DFAndroidNotificationChannelImportance {
 /// Controls notification visibility on lockscreens and during screen sharing.
 /// Shows notification on all lockscreens, but conceals sensitive or private information on secure lockscreens.
 class DFAndroidNotificationChannelVisibility {
+  /// Private constructor to prevent instantiation.
+  DFAndroidNotificationChannelVisibility._();
+
   /// @see https://developer.android.com/reference/android/app/Notification#VISIBILITY_PUBLIC
   static const int public = 1;
 
